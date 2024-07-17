@@ -7,3 +7,5 @@ export LD_PRELOAD=/usr/lib/x86_64-linux-gnu/libstdc++.so.6
 
 Note: had to rename mujoco-3.6.1 to mujoco210 for this to work?
 Useful video here: https://www.youtube.com/watch?v=Wnb_fiStFb8
+
+mujoco documentation: https://mujoco.readthedocs.io/en/2.3.7/python.html
