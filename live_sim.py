@@ -3,22 +3,45 @@ import time
 import mujoco
 import mujoco.viewer
 
-m = mujoco.MjModel.from_xml_path('resources/universal_robots_ur5e/scene.xml')
-d = mujoco.MjData(m)
+print(mujoco.__file__)
 
+
+m = mujoco.MjModel.from_xml_path('resources/unitree_a1/scene.xml')
+d = mujoco.MjData(m)
+motorAngles = []
+
+#this is old
 def key_listener(keycode):
-  if chr(keycode) == ' ':
-    global paused
-    paused = not paused
+    #print(keycode)
+    if chr(keycode) == ' ':
+        global paused
+        paused = not paused
+    if chr(keycode) == '256':
+       endSim = True
+
+def init_controller(model, data):
+   pass
+
+def controller(model, data):
+   data.ctrl[0] = 15
+   data.ctrl[1] = 15
+   data.ctrl[2] = 15
+
+
+   #print output
+   print(f"{data.qpos[0]} | {data.qpos[1]} | {data.qpos[2]} | {data.qpos[3]}")
+
+init_controller(m, d)
+mujoco.set_mjcb_control(controller)
 
 paused = False
 
 with mujoco.viewer.launch_passive(m, d, key_callback=key_listener) as viewer:
-  # Close the viewer automatically after 30 wall-seconds.
   start = time.time()
   while viewer.is_running():
     step_start = time.time()
     if not paused:
+
         # mj_step can be replaced with code that also evaluates
         # a policy and applies a control signal before stepping the physics.
         mujoco.mj_step(m, d)
