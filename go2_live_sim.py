@@ -39,7 +39,7 @@ def controller(model, data):
     vel = kp * error
     data.qvel[joint] = vel
 
-m = mujoco.MjModel.from_xml_path('resources/unitree_a1/scene.xml')
+m = mujoco.MjModel.from_xml_path('resources/unitree_go2/scene.xml')
 #m = mujoco.MjModel.from_xml_path('resources/agility_cassie/scene.xml')
 d = mujoco.MjData(m)
 
