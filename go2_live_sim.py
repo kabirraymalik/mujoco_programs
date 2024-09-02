@@ -3,19 +3,9 @@ import time
 import mujoco
 import mujoco.viewer
 
-<<<<<<< HEAD
-print(mujoco.__file__)
-=======
 current_thetas = []
 target_thetas = []
->>>>>>> 4711ca6 (working go2 simulation)
 
-
-m = mujoco.MjModel.from_xml_path('resources/unitree_a1/scene.xml')
-d = mujoco.MjData(m)
-motorAngles = []
-
-#this is old
 def key_listener(keycode):
     #print(keycode)
     if chr(keycode) == ' ':
@@ -36,9 +26,6 @@ def controller(model, data):
    #print output
    print(f"{data.qpos[0]} | {data.qpos[1]} | {data.qpos[2]} | {data.qpos[3]}")
 
-init_controller(m, d)
-mujoco.set_mjcb_control(controller)
-
 def init_controller(model, data):
   for joint in range(0,len(data.qpos)-1):
     current_thetas.append(data.qpos[joint])
@@ -52,7 +39,7 @@ def controller(model, data):
     vel = kp * error
     data.qvel[joint] = vel
 
-m = mujoco.MjModel.from_xml_path('resources/unitree_go2/scene.xml')
+m = mujoco.MjModel.from_xml_path('resources/unitree_a1/scene.xml')
 #m = mujoco.MjModel.from_xml_path('resources/agility_cassie/scene.xml')
 d = mujoco.MjData(m)
 
@@ -84,7 +71,7 @@ with mujoco.viewer.launch_passive(m, d, key_callback=key_listener) as viewer:
             time.sleep(time_until_next_step)
 """
 
-base_refresh_rate = 500 #Hz
+base_refresh_rate = 1000 #Hz
 start_time = time.time()
 last_refresh = start_time
 
