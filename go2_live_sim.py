@@ -18,11 +18,6 @@ def init_controller(model, data):
    pass
 
 def controller(model, data):
-   data.ctrl[0] = 15
-   data.ctrl[1] = 15
-   data.ctrl[2] = 15
-
-
    #print output
    print(f"{data.qpos[0]} | {data.qpos[1]} | {data.qpos[2]} | {data.qpos[3]}")
 
@@ -32,18 +27,19 @@ def init_controller(model, data):
     target_thetas.append(data.qpos[joint])
 
 def controller(model, data):
-  pass
-"""
-  kp = 0.01
+  #pass
+  kp = 0.1
   for joint in range(0,len(data.qpos)-1):
-    current_thetas[joint] = data.qpos[joint]
-    error = target_thetas[joint] - current_thetas[joint]
-    vel = kp * error
-    data.qvel[joint] = vel
-"""
+    if joint in range(0,len(data.qvel)-1):
+      current_thetas[joint] = data.qpos[joint]
+      error = target_thetas[joint] - current_thetas[joint]
+      vel = kp * error
+      data.qvel[joint] = vel
 
-#m = mujoco.MjModel.from_xml_path('resources/unitree_go2/scene.xml')
-m = mujoco.MjModel.from_xml_path('resources/trossen_wx250s/scene.xml')
+
+m = mujoco.MjModel.from_xml_path('resources/unitree_go2/scene.xml')
+#m = mujoco.MjModel.from_xml_path('resources/trossen_wx250s/scene.xml')
+#m = mujoco.MjModel.from_xml_path('resources/agility_cassie/scene.xml')
 d = mujoco.MjData(m)
 
 init_controller(m, d)
