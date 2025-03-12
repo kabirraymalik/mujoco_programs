@@ -1,6 +1,7 @@
 import numpy as np
 import matplotlib.pyplot as plt
 from scipy.integrate import odeint
+import time
 
 class Bot():
     def __init__(self, init_motor_pos):
@@ -12,9 +13,11 @@ class Bot():
         self.integral = 0
         self.time_prev = -1e-6
         self.e_prev = 0
-        self.Kp = 0.6
-        self.Ki = 0.2
-        self.Kd = 0.1
+        self.Kp = 0.06
+        self.Ki = 0.02
+        self.Kd = 0.01
+        self.start_time = time.time()
+
     
     #controller modified from https://softinery.com/blog/implementation-of-pid-controller-in-python/
     def PID(self, goal, curr):

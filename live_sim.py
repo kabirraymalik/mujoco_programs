@@ -26,8 +26,7 @@ def controller(model, data):
    data.ctrl[0] = 15
    data.ctrl[1] = 15
    data.ctrl[2] = 15
-
-
+   
    #print output
    print(f"{data.qpos[0]} | {data.qpos[1]} | {data.qpos[2]} | {data.qpos[3]}")
 
